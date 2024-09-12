@@ -1735,14 +1735,18 @@ namespace ESDLang.Script
                 Extract = args => Obj.AC6Mission(args[0]),
                 Type = Namespace.Mission,
             });
-
+            AddMulti(extractors, "GiveItemDirectly", new IdExtractor
+            {
+                Indices = new List<int> { 0, 1 },
+                Extract = args => Obj.AC6Item((uint)args[0], args[1]),
+                Type = Namespace.Item,
+            });
             AddMulti(extractors, "ComparePlayerInventoryNumber", new IdExtractor
             {
                 Indices = new List<int> { 0, 1 },
                 Extract = args => Obj.Item((uint)args[0], args[1]),
                 Type = Namespace.Item,
             });
-            AddMulti(extractors, "GiveItemDirectly", extractors["ComparePlayerInventoryNumber"][0]);
             AddMulti(extractors, "IsEquipmentIDObtained", extractors["ComparePlayerInventoryNumber"][0]);
             AddMulti(extractors, "IsEquipmentIDEquipped", extractors["ComparePlayerInventoryNumber"][0]);
             AddMulti(extractors, "GetEventStatus", new IdExtractor
