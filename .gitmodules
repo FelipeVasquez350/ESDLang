@@ -4,3 +4,6 @@
 [submodule "SoulsIds"]
 	path = SoulsIds
 	url = git@github.com:thefifthmatt/SoulsIds.git
+[submodule "SmithboxSoulsFormats"]
+	path = SmithboxSoulsFormats
+	url = git@github.com:vawser/Smithbox.git
