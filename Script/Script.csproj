@@ -1,26 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>ESDLang.Script</RootNamespace>
-    <AssemblyName>esdtool</AssemblyName>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SoulsFormats\SoulsFormats\SoulsFormats.csproj" />
-    <ProjectReference Include="..\SoulsIds\SoulsIds\SoulsIds.csproj" />
-    <ProjectReference Include="..\ESDLang\ESDLang.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="DynamicLanguageRuntime" Version="1.3.4" />
-    <PackageReference Include="IronPython" Version="2.7.12" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Mono.Posix-4.5" Version="4.5.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Poke.cs" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>ESDLang.Script</RootNamespace>
+		<AssemblyName>esdtool</AssemblyName>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SoulsIds\SoulsIds\SoulsIds.csproj" />
+		<ProjectReference Include="..\ESDLang\ESDLang.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="DynamicLanguageRuntime" Version="1.3.4" />
+		<PackageReference Include="IronPython" Version="2.7.12" />
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+		<PackageReference Include="Mono.Posix-4.5" Version="4.5.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Poke.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="SoulsFormats">
+			<HintPath>..\..\Smithbox\src\Andre\SoulsFormats\SoulsFormats\bin\Debug\net8.0-windows\SoulsFormats.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 </Project>

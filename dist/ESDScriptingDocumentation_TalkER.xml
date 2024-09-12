@@ -100,6 +100,24 @@
         <Command Bank="1" ID="146" Name="OpenDupeShop" Description=""/>
         <Command Bank="1" ID="147" Name="SetEventFlagValue" Description=""/>
         <Command Bank="1" ID="148" Name="OpenChampionsEquipmentShop" Description=""/>
+
+		<Command Bank="1" ID="120" Name="UnkSpEffect" Description=""/>
+		<Command Bank="1" ID="214" Name="StartEvent" Description=""/>
+		<Command Bank="1" ID="215" Name="StartCommonEvent" Description=""/>
+		<Command Bank="1" ID="221" Name="SetMissionState" Description="Or set mission state?">
+			<Arg Name="MissionID" ValueType="Number" Description="" Namespace="Mission"/>
+			<Arg Name="Option" ValueType="Number" Description="0: Available / 1: Complete" />
+			<Arg Name="Value" ValueType="Number" Description="" />
+		</Command>
+		<Command Bank="1" ID="226" Name="ShowTutorialMessage" Description="">
+			<Arg Name="TutorialID" ValueType="Number" Description="" Namespace="Tutorial"/>
+		</Command>
+		<Command Bank="1" ID="250" Name="GiveItemDirectly" Description="">
+			<Arg Name="ItemType" ValueType="Number" Description="" Namespace="ItemType"/>
+			<Arg Name="Item" ValueType="Number" Description="TODO localize to AC6 somehow" Namespace="Item"/>
+			<Arg Name="Quantity" ValueType="Number" Description="" />
+		</Command>
+		<Command Bank="1" ID="259" Name="UnkUnlockDecal" Description="" />
     </CommandList>
     <FunctionList>
         <Function ID="0"   Name="GetWhetherEnemiesAreNearby" Description=""/>
@@ -178,7 +196,22 @@
         <Function ID="110" Name="GetTotalBonfireLevel" Description=""/>
         <Function ID="111" Name="GetIsOnline" Description="Unused"/>
         <Function ID="112" Name="GetIsNetPenalizedForArena" Description=""/>
-    </FunctionList>
+		
+		<Function ID="312" Name="EventComplete" Description=""/>
+		<Function ID="314" Name="UnkMissionComplete" Description="">
+			<Param Name="MissionId" ValueType="Number" Description="" Namespace="Mission" />
+		    <Param Name="IsComplete" ValueType="Number" Description=""/>   
+		</Function>
+		<Function ID="322" Name="UnkGameCycle" Description=""/>
+		<Function ID="331" Name="UnkArenaComplete" Description="">
+			<Param Name="ArenaId" ValueType="Number" Description="" Namespace="Arena" />
+		</Function>
+		<Function ID="337" Name="GetMercenaryRank" Description=""/>
+	</FunctionList>
     <EnumList>
+		<Enum Name="MissionState">
+			<EnumEntry Value="0" Name="MissionState.Unlocked" Description=""/>
+			<EnumEntry Value="1" Name="MissionState.Complete" Description=""/>
+		</Enum>
     </EnumList>
 </EzSembleContext>

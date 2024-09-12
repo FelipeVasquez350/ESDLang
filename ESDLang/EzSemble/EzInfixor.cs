@@ -263,9 +263,9 @@ namespace ESDLang.EzSemble
                     }
                     else if (OperatorsByByte.ContainsKey(b))
                     {
-                        if (OperatorsByByte[b] == "N")
+                        if (UnaryOperators.Contains(b))
                         {
-                            exprs.Push(new UnaryExpr { Op = "N", Arg = exprs.Pop() });
+                            exprs.Push(new UnaryExpr { Op = OperatorsByByte[b], Arg = exprs.Pop() });
                         }
                         else
                         {
@@ -319,7 +319,14 @@ namespace ESDLang.EzSemble
                         exprs.Push(new Unknown { Opcode = b });
                     }
                 }
-                if (exprs.Count != 1) throw new Exception("Could not parse expr. Remaining stack: " + string.Join("; ", exprs) + $"; = {string.Join(" ", Bytes.Select(x => x.ToString("X2")))}");
+                //if (exprs.Count != 1) throw new Exception("Could not parse expr. Remaining stack: " + string.Join("; ", exprs) + $"; = {string.Join(" ", Bytes.Select(x => x.ToString("X2")))}");
+                if (exprs.Count != 1)
+                {
+                    string err = $"Could not parse expr. Remaining stack: " + string.Join("; ", exprs) + $"; = {string.Join(" ", Bytes.Select(x => x.ToString("X2")))}";
+                    Console.WriteLine(err);
+                    //The actual result here seems to be the deepest entry in the stack (index 0)
+                    return new FunctionCall { Args = new List<Expr> { exprs.Last() }, Name = "XXX" };
+                }
                 return exprs.Pop();
             }
 

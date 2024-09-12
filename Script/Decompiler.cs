@@ -22,7 +22,7 @@ namespace ESDLang.Script
         private readonly string esdId;
         private readonly Universe u;
         private readonly EDD edd;
-        public Decompiler(EzSembleContext ezContext, ESDOptions options, string esdId, Universe u=null, EDD edd=null)
+        public Decompiler(EzSembleContext ezContext, ESDOptions options, string esdId, Universe u = null, EDD edd = null)
         {
             this.ezContext = ezContext;
             this.options = options;
@@ -34,7 +34,7 @@ namespace ESDLang.Script
         public void Decompile(ESD esd, TextWriter writer)
         {
             SortedDictionary<int, SortedDictionary<int, State>> machines = new SortedDictionary<int, SortedDictionary<int, State>>();
-            Condition getCond(State state, ESD.Condition esdCond, bool sub=false)
+            Condition getCond(State state, ESD.Condition esdCond, bool sub = false)
             {
                 Condition cond = new Condition
                 {
@@ -673,7 +673,7 @@ namespace ESDLang.Script
         {
             public int State { get; set; }
             public bool Unused { get; set; }
-            public static Exec Of(int s, bool unused=false) => new Exec { State = s, Unused = unused };
+            public static Exec Of(int s, bool unused = false) => new Exec { State = s, Unused = unused };
             public override int Start() => State;
         }
         public class IfElse : Subtree
@@ -1422,6 +1422,7 @@ namespace ESDLang.Script
                         {
                             Obj obj = extractor.Extract(argValues);
                             if (obj == null) return;
+
                             // Constant usage, the exact expr used doesn't matter, since it's always used inline
                             Expr lastExpr = usage.Exprs[usage.Exprs.Count - 1];
                             ValueSource source = (ValueSource)lastExpr.SourceInfo;
@@ -1635,6 +1636,7 @@ namespace ESDLang.Script
                     case Namespace.Accessory: return "ring";
                     case Namespace.EventFlag: return "flag";
                     case Namespace.Talk: return "text";
+
                     default: return ns.ToString().ToLower();
                 }
             }
@@ -1720,12 +1722,27 @@ namespace ESDLang.Script
             // For now, hardcode these. No args are yet 'checked' outside of this.
             Dictionary<string, List<IdExtractor>> extractors = new Dictionary<string, List<IdExtractor>>();
             // Functions
+
+            AddMulti(extractors, "SetMissionState", new IdExtractor
+            {
+                Indices = new List<int> { 0 },
+                Extract = args => Obj.AC6Mission(args[0]),
+                Type = Namespace.Mission,
+            });
+            AddMulti(extractors, "UnkMissionComplete", new IdExtractor
+            {
+                Indices = new List<int> { 0 },
+                Extract = args => Obj.AC6Mission(args[0]),
+                Type = Namespace.Mission,
+            });
+
             AddMulti(extractors, "ComparePlayerInventoryNumber", new IdExtractor
             {
                 Indices = new List<int> { 0, 1 },
                 Extract = args => Obj.Item((uint)args[0], args[1]),
                 Type = Namespace.Item,
             });
+            AddMulti(extractors, "GiveItemDirectly", extractors["ComparePlayerInventoryNumber"][0]);
             AddMulti(extractors, "IsEquipmentIDObtained", extractors["ComparePlayerInventoryNumber"][0]);
             AddMulti(extractors, "IsEquipmentIDEquipped", extractors["ComparePlayerInventoryNumber"][0]);
             AddMulti(extractors, "GetEventStatus", new IdExtractor

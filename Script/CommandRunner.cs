@@ -588,7 +588,7 @@ namespace ESDLang.Script
                     if (data == null)
                     {
                         data = File.ReadAllBytes(path);
-                        data = DCX.Is(data) ? DCX.Decompress(data) : data;
+                        data = DCX.Is(data) ? DCX.Decompress(data).ToArray() : data;
                     }
                     if (parse)
                     {
@@ -667,7 +667,7 @@ namespace ESDLang.Script
             // This will get a bit hacky but we don't want to parse the whole ESD to do this.
             if (data.Length >= 0x80) Array.Clear(data, 0x70, 0x10);
             BinaryReaderEx br = new BinaryReaderEx(false, data);
-            br.VarintLong = br.AssertASCII("fSSL", "fsSL") == "fsSL";
+            br.VarintLong = br.AssertASCII("fsSL") == "fsSL";
             br.Position = 0x80;
             if (br.VarintLong) br.AssertInt32(0);
             br.ReadVarint();

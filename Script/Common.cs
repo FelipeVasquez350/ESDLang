@@ -28,7 +28,7 @@ namespace ESDLang.Script
             public List<int> Prev = new List<int>();
             public List<int> Next = new List<int>();
             public override string ToString() => $"State({Machine}-{ID}, Entry=[{Entry}], While=[{While}], Exit=[{Exit}], {string.Join(", ", Conditions)})";
-            public void VisitConds(AstVisitor visitor, List<Condition> conds=null)
+            public void VisitConds(AstVisitor visitor, List<Condition> conds = null)
             {
                 if (conds == null) conds = Conditions;
                 foreach (Condition cond in conds)
@@ -533,6 +533,7 @@ namespace ESDLang.Script
             public ConstExpr Value { get; set; }
             public Expr Source { get; set; }
             // public List<ValueUsage> Usages = new List<ValueUsage>();
+
             public Dictionary<ValueUsage, List<Obj>> Usages = new Dictionary<ValueUsage, List<Obj>>();
         }
         public class MachineArgs
@@ -563,6 +564,7 @@ namespace ESDLang.Script
             if (expr != null) expr.Visit(AstVisitor.PreAct(addSource));
             List<string> infos = new List<string>();
             HashSet<Obj> objs = new HashSet<Obj>();
+
             foreach (ValueSource source in sources)
             {
                 foreach (KeyValuePair<ValueUsage, List<Obj>> usage in source.Usages)
@@ -628,7 +630,7 @@ namespace ESDLang.Script
             args = args.Select((arg, i) => arg + (i == st.Args.Count - 1 ? "" : ",")).ToList();
             return prefix == null ? $"{name}({string.Join(" ", args)})" : WordWrap(prefix + name, args.ToArray(), alwaysParens: true);
         }
-        public static string WriteExpr(Expr expr, Dictionary<string, string> replace = null, string parent=null, bool rhs=false)
+        public static string WriteExpr(Expr expr, Dictionary<string, string> replace = null, string parent = null, bool rhs = false)
         {
             string s;
             if (expr is ConstExpr ce)
@@ -714,7 +716,7 @@ namespace ESDLang.Script
             else throw new Exception($"Unknown expression subclass {expr.GetType()} in current context");
             return s;
         }
-        public static bool TryEvalInt(Expr expr, out int ret, Dictionary<int, int> args=null)
+        public static bool TryEvalInt(Expr expr, out int ret, Dictionary<int, int> args = null)
         {
             ret = 0;
             if (expr is ConstExpr ce)

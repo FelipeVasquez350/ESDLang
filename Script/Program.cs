@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace ESDLang.Script
 {
-    class Program
+    public class Program
     {
         [DllImport("kernel32")]
         static extern bool AllocConsole();
@@ -18,7 +18,7 @@ namespace ESDLang.Script
         [DllImport("kernel32")]
         static extern bool FreeConsole();
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
