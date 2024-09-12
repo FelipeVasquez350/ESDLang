@@ -1741,6 +1741,20 @@ namespace ESDLang.Script
                 Extract = args => Obj.AC6Item((uint)args[0], args[1]),
                 Type = Namespace.Item,
             });
+            AddMulti(extractors, "SetEventFlag", new IdExtractor
+            {
+                Indices = new List<int> { 0 },
+                Extract = args => Obj.EventFlag(args[0]),
+                Type = Namespace.EventFlag,
+            });
+            AddMulti(extractors, "StartEvent", extractors["SetEventFlag"][0]);
+            AddMulti(extractors, "StartCommonEvent", extractors["SetEventFlag"][0]);
+            AddMulti(extractors, "ShowTutorialMessage", new IdExtractor
+            {
+                Indices = new List<int> { 0 },
+                Extract = args => Obj.Tutorial(args[0]),
+                Type = Namespace.Tutorial,
+            });
             AddMulti(extractors, "ComparePlayerInventoryNumber", new IdExtractor
             {
                 Indices = new List<int> { 0, 1 },
