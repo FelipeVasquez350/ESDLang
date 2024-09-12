@@ -206,6 +206,7 @@
 		<Function ID="331" Name="UnkArenaComplete" Description="">
 			<Param Name="ArenaId" ValueType="Number" Description="" Namespace="Arena" />
 		</Function>
+		<Function ID="327" Name="GetChapter" Description=""/>
 		<Function ID="337" Name="GetMercenaryRank" Description=""/>
 	</FunctionList>
     <EnumList>
